@@ -1,0 +1,19 @@
+{
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "options": ["London", "Berlin", "Paris", "Madrid"],
+      "correct": 2
+    },
+    {
+      "question": "Which programming language is known for its simplicity?",
+      "options": ["C++", "Python", "Assembly", "Java"],
+      "correct": 1
+    },
+    {
+      "question": "What does HTTP stand for?",
+      "options": ["HyperText Transfer Protocol", "High Tech Transfer Protocol", "Home Tool Transfer Protocol", "Host Transfer Protocol"],
+      "correct": 0
+    }
+  ]
+}

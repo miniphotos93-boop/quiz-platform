@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; }
+        .score { font-size: 2em; margin: 20px 0; }
+        .btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Quiz Results</h1>
+    <div class="score">
+        You scored {{ score }} out of {{ total }}
+        <br>
+        ({{ "%.1f"|format((score/total*100) if total > 0 else 0) }}%)
+    </div>
+    <a href="/" class="btn">Take Quiz Again</a>
+</body>
+</html>

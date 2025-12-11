@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .question { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .option { margin: 10px 0; }
+        .btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .correct { background: #28a745; }
+        .incorrect { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>Quiz</h1>
+    <div id="quiz-container">
+        {% for question in questions %}
+        <div class="question" id="q{{ loop.index0 }}">
+            <h3>{{ loop.index }}. {{ question.question }}</h3>
+            {% for option in question.options %}
+            <div class="option">
+                <input type="radio" name="q{{ loop.index0 }}" value="{{ loop.index0 }}" id="q{{ loop.index0 }}_{{ loop.index0 }}">
+                <label for="q{{ loop.index0 }}_{{ loop.index0 }}">{{ option }}</label>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
+
+    <script>
+        let currentScore = 0;
+        let totalQuestions = {{ questions|length }};
+        let answeredQuestions = 0;
+
+        function submitQuiz() {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach((q, idx) => {
+                const selected = q.querySelector('input[type="radio"]:checked');
+                if (selected) {
+                    fetch('/submit', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            question_idx: idx,
+                            answer: parseInt(selected.value)
+                        })
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        answeredQuestions++;
+                        if (data.correct) currentScore++;
+                        
+                        if (answeredQuestions === totalQuestions) {
+                            setTimeout(() => window.location.href = '/results', 1000);
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
