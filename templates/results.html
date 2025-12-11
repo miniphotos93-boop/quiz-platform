@@ -3,18 +3,129 @@
 <head>
     <title>Quiz Results</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; }
-        .score { font-size: 2em; margin: 20px 0; }
-        .btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02, #c5d86d);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 50px;
+            border-radius: 20px;
+            border: 3px solid #ffcc02;
+            box-shadow: 0 0 30px rgba(255, 204, 2, 0.5);
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #ffcc02;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px #ff6b35;
+            font-weight: 900;
+        }
+        
+        .score {
+            font-size: 3em;
+            margin: 30px 0;
+            font-weight: 900;
+        }
+        
+        .score-good {
+            color: #c5d86d;
+            text-shadow: 2px 2px 0px #ff6b35;
+        }
+        
+        .score-average {
+            color: #f7931e;
+            text-shadow: 2px 2px 0px #ff6b35;
+        }
+        
+        .score-poor {
+            color: #ff6b35;
+            text-shadow: 2px 2px 0px #000;
+        }
+        
+        .percentage {
+            font-size: 1.5em;
+            color: #ffcc02;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+        
+        .message {
+            color: #f7931e;
+            font-size: 1.2em;
+            margin: 20px 0;
+            font-weight: 400;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            margin: 20px 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
     </style>
 </head>
 <body>
-    <h1>Quiz Results</h1>
-    <div class="score">
-        You scored {{ score }} out of {{ total }}
-        <br>
-        ({{ "%.1f"|format((score/total*100) if total > 0 else 0) }}%)
+    <div class="container">
+        <h1>Quiz Complete!</h1>
+        
+        {% set percentage = (score/total*100) if total > 0 else 0 %}
+        
+        <div class="score {% if percentage >= 70 %}score-good{% elif percentage >= 50 %}score-average{% else %}score-poor{% endif %}">
+            {{ score }} / {{ total }}
+        </div>
+        
+        <div class="percentage">
+            {{ "%.1f"|format(percentage) }}%
+        </div>
+        
+        <div class="message">
+            {% if percentage >= 80 %}
+                🎬 Tamil Cinema Expert! You know your retro films!
+            {% elif percentage >= 60 %}
+                🎭 Good knowledge of Tamil cinema classics!
+            {% elif percentage >= 40 %}
+                🎪 Not bad! Time to watch more 80s-90s films!
+            {% else %}
+                📺 Time for a Tamil cinema marathon!
+            {% endif %}
+        </div>
+        
+        <a href="/" class="btn">Take Quiz Again</a>
     </div>
-    <a href="/" class="btn">Take Quiz Again</a>
 </body>
 </html>

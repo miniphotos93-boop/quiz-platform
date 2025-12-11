@@ -49,6 +49,81 @@
       "question": "The song 'Chinna Chinna Aasai' is from which 1992 film?",
       "options": ["Gentleman", "Roja", "Thevar Magan", "Devar Magan"],
       "correct": 1
+    },
+    {
+      "question": "Which film marked Mani Ratnam's directorial debut?",
+      "options": ["Pallavi Anu Pallavi", "Pagal Nilavu", "Mouna Ragam", "Agni Natchathiram"],
+      "correct": 1
+    },
+    {
+      "question": "Who played the lead role in 'Sindhu Bhairavi' (1985)?",
+      "options": ["Kamal Haasan", "Rajinikanth", "Sivakumar", "Prabhu"],
+      "correct": 2
+    },
+    {
+      "question": "Which composer is known as the 'Isaignani'?",
+      "options": ["M.S. Viswanathan", "Ilaiyaraaja", "A.R. Rahman", "Deva"],
+      "correct": 1
+    },
+    {
+      "question": "The 1991 film 'Thalapathi' was inspired by which epic?",
+      "options": ["Ramayana", "Mahabharata", "Silappathikaram", "Manimekalai"],
+      "correct": 1
+    },
+    {
+      "question": "Which actress won National Award for 'Mouna Ragam' (1986)?",
+      "options": ["Revathi", "Radha", "Sridevi", "Suhasini"],
+      "correct": 0
+    },
+    {
+      "question": "Who directed 'Punnagai Mannan' (1986)?",
+      "options": ["K. Balachander", "Bharathiraja", "Mahendran", "Fazil"],
+      "correct": 0
+    },
+    {
+      "question": "Which film featured Rajinikanth as a coolie?",
+      "options": ["Coolie", "Baasha", "Annamalai", "Thalapathi"],
+      "correct": 0
+    },
+    {
+      "question": "The 1987 film 'Pushpaka Vimana' starred which actor?",
+      "options": ["Rajinikanth", "Kamal Haasan", "Prabhu", "Vijayakanth"],
+      "correct": 1
+    },
+    {
+      "question": "Who composed music for 'Mouna Ragam'?",
+      "options": ["Ilaiyaraaja", "A.R. Rahman", "M.S. Viswanathan", "Deva"],
+      "correct": 0
+    },
+    {
+      "question": "Which 1990 film starred Kamal Haasan as a dwarf?",
+      "options": ["Apoorva Sagodharargal", "Michael Madana Kama Rajan", "Sathi Leelavathi", "Avvai Shanmugi"],
+      "correct": 0
+    },
+    {
+      "question": "The film 'Agni Natchathiram' (1988) featured which two lead actors?",
+      "options": ["Kamal-Rajini", "Prabhu-Karthik", "Vijayakanth-Sathyaraj", "Mohan-Raghuvaran"],
+      "correct": 1
+    },
+    {
+      "question": "Who directed 'Kizhakku Cheemayile' (1993)?",
+      "options": ["Bharathiraja", "Vasanth", "Kathir", "Cheran"],
+      "correct": 1
+    },
+    {
+      "question": "Which actress was paired opposite Rajinikanth in 'Baasha'?",
+      "options": ["Nagma", "Meena", "Roja", "Kushboo"],
+      "correct": 1
+    },
+    {
+      "question": "The 1984 film 'Vaidehi Kathirunthal' starred which actress in lead?",
+      "options": ["Revathi", "Radha", "Sridevi", "Jayaprada"],
+      "correct": 3
+    },
+    {
+      "question": "Which film won Kamal Haasan his first National Award?",
+      "options": ["Moondram Pirai", "Sagara Sangamam", "Swathi Muthyam", "Nayakan"],
+      "correct": 0
     }
   ]
 }

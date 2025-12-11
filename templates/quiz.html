@@ -1,63 +1,235 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz</title>
+    <title>Tamil Cinema Quiz</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .question { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .option { margin: 10px 0; }
-        .btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        .correct { background: #28a745; }
-        .incorrect { background: #dc3545; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02, #c5d86d);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            border: 3px solid #ffcc02;
+            box-shadow: 0 0 30px rgba(255, 204, 2, 0.5);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .progress {
+            color: #ffcc02;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+        
+        .timer {
+            font-size: 2em;
+            color: #ff6b35;
+            font-weight: 900;
+            margin: 10px 0;
+        }
+        
+        .question {
+            background: rgba(255, 204, 2, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #ffcc02;
+        }
+        
+        .question h2 {
+            color: #ffcc02;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #ff6b35;
+        }
+        
+        .option {
+            background: rgba(247, 147, 30, 0.2);
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #f7931e;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .option:hover {
+            background: rgba(247, 147, 30, 0.4);
+            transform: translateX(10px);
+        }
+        
+        .option.selected {
+            background: #f7931e;
+            border-color: #ffcc02;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
-    <h1>Quiz</h1>
-    <div id="quiz-container">
-        {% for question in questions %}
-        <div class="question" id="q{{ loop.index0 }}">
-            <h3>{{ loop.index }}. {{ question.question }}</h3>
-            {% for option in question.options %}
-            <div class="option">
-                <input type="radio" name="q{{ loop.index0 }}" value="{{ loop.index0 }}" id="q{{ loop.index0 }}_{{ loop.index0 }}">
-                <label for="q{{ loop.index0 }}_{{ loop.index0 }}">{{ option }}</label>
-            </div>
-            {% endfor %}
+    <div class="quiz-container">
+        <div class="header">
+            <div class="progress">Question <span id="current">{{ question_num }}</span> of {{ total }}</div>
+            <div class="timer" id="timer">10</div>
         </div>
-        {% endfor %}
+        
+        <div class="question">
+            <h2 id="question-text">{{ question.question }}</h2>
+            <div id="options">
+                {% for option in question.options %}
+                <div class="option" onclick="selectOption({{ loop.index0 }})">
+                    {{ option }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>Next Question</button>
     </div>
-    <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
 
     <script>
-        let currentScore = 0;
-        let totalQuestions = {{ questions|length }};
-        let answeredQuestions = 0;
+        let timeLeft = 10;
+        let timer;
+        let selectedAnswer = null;
+        let currentQuestion = {{ question_num - 1 }};
+        let totalQuestions = {{ total }};
+        let score = 0;
 
-        function submitQuiz() {
-            const questions = document.querySelectorAll('.question');
-            questions.forEach((q, idx) => {
-                const selected = q.querySelector('input[type="radio"]:checked');
-                if (selected) {
-                    fetch('/submit', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({
-                            question_idx: idx,
-                            answer: parseInt(selected.value)
-                        })
-                    })
-                    .then(r => r.json())
-                    .then(data => {
-                        answeredQuestions++;
-                        if (data.correct) currentScore++;
-                        
-                        if (answeredQuestions === totalQuestions) {
-                            setTimeout(() => window.location.href = '/results', 1000);
-                        }
-                    });
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (selectedAnswer === null) {
+                        selectedAnswer = -1; // No answer selected
+                    }
+                    submitAnswer();
                 }
+            }, 1000);
+        }
+
+        function selectOption(index) {
+            if (timeLeft <= 0) return;
+            
+            selectedAnswer = index;
+            
+            // Remove previous selection
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            document.querySelectorAll('.option')[index].classList.add('selected');
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function submitAnswer() {
+            clearInterval(timer);
+            
+            fetch('/submit', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    answer: selectedAnswer
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.correct) score++;
+                setTimeout(() => nextQuestion(), 1000);
             });
         }
+
+        function nextQuestion() {
+            if (currentQuestion >= totalQuestions - 1) {
+                window.location.href = '/results';
+                return;
+            }
+
+            fetch('/next_question')
+            .then(r => r.json())
+            .then(data => {
+                if (data.finished) {
+                    window.location.href = '/results';
+                    return;
+                }
+                
+                // Update question
+                document.getElementById('question-text').textContent = data.question;
+                document.getElementById('current').textContent = data.question_num;
+                
+                // Update options
+                const optionsDiv = document.getElementById('options');
+                optionsDiv.innerHTML = '';
+                data.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.textContent = option;
+                    optionDiv.onclick = () => selectOption(index);
+                    optionsDiv.appendChild(optionDiv);
+                });
+                
+                // Reset for next question
+                selectedAnswer = null;
+                timeLeft = 10;
+                document.getElementById('timer').textContent = timeLeft;
+                document.getElementById('next-btn').disabled = true;
+                currentQuestion++;
+                
+                startTimer();
+            });
+        }
+
+        // Start timer when page loads
+        startTimer();
     </script>
 </body>
 </html>

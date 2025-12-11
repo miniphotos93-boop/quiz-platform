@@ -1,16 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Team Quiz Platform</title>
+    <title>Tamil Cinema Retro Quiz</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        .btn:hover { background: #0056b3; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02, #c5d86d);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #ffcc02;
+            box-shadow: 0 0 30px rgba(255, 204, 2, 0.5);
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #ffcc02;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0px #ff6b35;
+            font-weight: 900;
+        }
+        
+        .subtitle {
+            color: #f7931e;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .retro-text {
+            color: #c5d86d;
+            font-size: 1em;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Team Quiz Platform</h1>
-    <p>Test your knowledge with our team quiz!</p>
-    <a href="/quiz" class="btn">Start Quiz</a>
+    <div class="container">
+        <h1>தமிழ் சினிமா</h1>
+        <div class="subtitle">80s-90s Retro Quiz</div>
+        <div class="retro-text">Test your knowledge of Tamil cinema's golden era!</div>
+        <div class="retro-text">25 Questions • 10 seconds each</div>
+        <br>
+        <a href="/quiz" class="btn">START QUIZ</a>
+    </div>
 </body>
 </html>
