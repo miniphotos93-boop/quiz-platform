@@ -1,18 +1,43 @@
 {
   "questions": [
     {
-      "question": "What is the capital of France?",
-      "options": ["London", "Berlin", "Paris", "Madrid"],
-      "correct": 2
-    },
-    {
-      "question": "Which programming language is known for its simplicity?",
-      "options": ["C++", "Python", "Assembly", "Java"],
+      "question": "Which actor is known as the 'Superstar' of Tamil cinema?",
+      "options": ["Kamal Haasan", "Rajinikanth", "Sivaji Ganesan", "Vijayakanth"],
       "correct": 1
     },
     {
-      "question": "What does HTTP stand for?",
-      "options": ["HyperText Transfer Protocol", "High Tech Transfer Protocol", "Home Tool Transfer Protocol", "Host Transfer Protocol"],
+      "question": "Who directed the 1987 film 'Nayakan'?",
+      "options": ["K. Balachander", "Bharathiraja", "Mani Ratnam", "Mahendran"],
+      "correct": 2
+    },
+    {
+      "question": "Which 1992 film starred Kamal Haasan in multiple roles?",
+      "options": ["Thevar Magan", "Mahanadi", "Michael Madana Kama Rajan", "Gunaa"],
+      "correct": 2
+    },
+    {
+      "question": "Who composed music for the film 'Roja' (1992)?",
+      "options": ["Ilaiyaraaja", "A.R. Rahman", "M.S. Viswanathan", "Deva"],
+      "correct": 1
+    },
+    {
+      "question": "Which actress was known as the 'Dream Girl' of Tamil cinema in the 80s?",
+      "options": ["Sridevi", "Revathi", "Radha", "Kushboo"],
+      "correct": 0
+    },
+    {
+      "question": "The 1985 film 'Mudhal Mariyadhai' was directed by?",
+      "options": ["Bharathiraja", "Mahendran", "K. Balachander", "Balu Mahendra"],
+      "correct": 0
+    },
+    {
+      "question": "Which Rajinikanth film featured the famous dialogue 'Ketta Payyan Sir Idhu'?",
+      "options": ["Baasha", "Annamalai", "Thalapathi", "Padayappa"],
+      "correct": 1
+    },
+    {
+      "question": "Who directed the 1989 film 'Apoorva Sagodharargal'?",
+      "options": ["Singeetam Srinivasa Rao", "K.S. Ravikumar", "Suresh Krissna", "P. Vasu"],
       "correct": 0
     }
   ]
