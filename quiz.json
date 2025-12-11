@@ -32,8 +32,8 @@
     },
     {
       "question": "Which Rajinikanth film featured the famous dialogue 'Ketta Payyan Sir Idhu'?",
-      "options": ["Baasha", "Annamalai", "Thalapathi", "Padayappa"],
-      "correct": 1
+      "options": ["Mullum Malarum", "Annamalai", "Thalapathi", "Padayappa"],
+      "correct": 0
     },
     {
       "question": "Who directed the 1989 film 'Apoorva Sagodharargal'?",

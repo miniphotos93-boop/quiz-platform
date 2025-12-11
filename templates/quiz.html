@@ -179,7 +179,22 @@
             if (selectedAnswer === null) {
                 selectedAnswer = -1;
             }
-            submitAnswer();
+            
+            fetch('/submit', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    answer: selectedAnswer
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                setTimeout(() => nextQuestion(), 500);
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                nextQuestion();
+            });
         }
 
         function submitAnswer() {
