@@ -39,6 +39,16 @@
       "question": "Who directed the 1989 film 'Apoorva Sagodharargal'?",
       "options": ["Singeetam Srinivasa Rao", "K.S. Ravikumar", "Suresh Krissna", "P. Vasu"],
       "correct": 0
+    },
+    {
+      "question": "Which 1988 film won the National Film Award for Best Feature Film in Tamil?",
+      "options": ["Punnagai Mannan", "Sathya", "Agni Natchathiram", "Pudhu Pudhu Arthangal"],
+      "correct": 3
+    },
+    {
+      "question": "The song 'Chinna Chinna Aasai' is from which 1992 film?",
+      "options": ["Gentleman", "Roja", "Thevar Magan", "Devar Magan"],
+      "correct": 1
     }
   ]
 }
