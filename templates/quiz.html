@@ -139,39 +139,52 @@
         let selectedAnswer = null;
         let currentQuestion = {{ question_num - 1 }};
         let totalQuestions = {{ total }};
-        let score = 0;
+        let isProcessing = false;
 
         function startTimer() {
+            clearInterval(timer);
+            timeLeft = 10;
+            document.getElementById('timer').textContent = timeLeft;
+            
             timer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('timer').textContent = timeLeft;
                 
                 if (timeLeft <= 0) {
                     clearInterval(timer);
-                    if (selectedAnswer === null) {
-                        selectedAnswer = -1; // No answer selected
+                    if (!isProcessing) {
+                        autoSubmit();
                     }
-                    submitAnswer();
                 }
             }, 1000);
         }
 
         function selectOption(index) {
-            if (timeLeft <= 0) return;
+            if (isProcessing || timeLeft <= 0) return;
             
             selectedAnswer = index;
             
-            // Remove previous selection
             document.querySelectorAll('.option').forEach(opt => {
                 opt.classList.remove('selected');
             });
             
-            // Add selection to clicked option
             document.querySelectorAll('.option')[index].classList.add('selected');
             document.getElementById('next-btn').disabled = false;
         }
 
+        function autoSubmit() {
+            if (isProcessing) return;
+            isProcessing = true;
+            
+            if (selectedAnswer === null) {
+                selectedAnswer = -1;
+            }
+            submitAnswer();
+        }
+
         function submitAnswer() {
+            if (isProcessing) return;
+            isProcessing = true;
             clearInterval(timer);
             
             fetch('/submit', {
@@ -183,8 +196,11 @@
             })
             .then(r => r.json())
             .then(data => {
-                if (data.correct) score++;
-                setTimeout(() => nextQuestion(), 1000);
+                setTimeout(() => nextQuestion(), 500);
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                isProcessing = false;
             });
         }
 
@@ -202,11 +218,9 @@
                     return;
                 }
                 
-                // Update question
                 document.getElementById('question-text').textContent = data.question;
                 document.getElementById('current').textContent = data.question_num;
                 
-                // Update options
                 const optionsDiv = document.getElementById('options');
                 optionsDiv.innerHTML = '';
                 data.options.forEach((option, index) => {
@@ -217,18 +231,19 @@
                     optionsDiv.appendChild(optionDiv);
                 });
                 
-                // Reset for next question
                 selectedAnswer = null;
-                timeLeft = 10;
-                document.getElementById('timer').textContent = timeLeft;
                 document.getElementById('next-btn').disabled = true;
                 currentQuestion++;
+                isProcessing = false;
                 
                 startTimer();
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                window.location.href = '/results';
             });
         }
 
-        // Start timer when page loads
         startTimer();
     </script>
 </body>
